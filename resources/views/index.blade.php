@@ -5,6 +5,9 @@
 @section('card-header', 'Estoque disponível')
 
 @section('body')
+
+@include('includes.errors')
+
 <div class="row row-cols-1 row-cols-md-3">
     @foreach ($products as $product)
     <div class="col mb-4">
