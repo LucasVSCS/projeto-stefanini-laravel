@@ -1,1 +1,10 @@
 @import '~bootstrap/dist/css/bootstrap.css';
+
+.card-image {
+    width: 120px;
+    height: 170px;
+}
+
+#zip-warning {
+    display: none;
+}

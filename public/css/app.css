@@ -9759,4 +9759,12 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+.card-image {
+    width: 120px;
+    height: 170px;
+}
+
+#zip-warning {
+    display: none;
+}
 
