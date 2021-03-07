@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
+    protected $table = "orders";
+
+    protected $primaryKey = "id";
+
+    public $timestamps = false;
+
+    protected $fillable = ['date', 'final_price', 'user_id'];
+
+    public function insertOrder(array $orderData)
+    {
+
+        $order = Order::create([
+            'date' => $orderData['date'],
+            'final_price' => $orderData['final_price'],
+            'user_id' => $orderData['user_id'],
+        ]);
+
+        return $order;
+
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

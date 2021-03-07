@@ -22,14 +22,28 @@ class Product extends Model
         return $products;
     }
 
-    public function verifyAvailableStock($productCode, $productQuantity)
+    public function verifyAvailableStock(String $productCode, int $productQuantity)
     {
-        $product = Product::select('price', 'stock_quantity', 'name', 'image_url')
+        $product = Product::select('id', 'price', 'stock_quantity', 'name', 'image_url')
             ->where('product_code', $productCode)
             ->where('stock_quantity', '>=', $productQuantity)
             ->first();
 
         return $product;
+    }
+
+    public function updateAvailableStock(array $productDetails)
+    {
+        $product = $this->verifyAvailableStock(
+            $productDetails['product_code'],
+            $productDetails['product_quantity']
+        );
+
+        $product->stock_quantity -= $productDetails['product_quantity'];
+        $product->save();
+
+        return $product;
+
     }
 
 }
