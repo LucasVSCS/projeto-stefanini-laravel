@@ -13,6 +13,13 @@ class OrderDetails extends Pivot
 
     protected $fillable = ['order_id', 'product_id', 'product_quantity', 'product_unity_price'];
 
+    /*
+     * Função para inserir os dados da tabela pivot do pedido no banco de dados
+     *
+     * Recebe: Array com dados do pedido e do produto
+     * Retorna: Uma instância da tabela pivot dos pedidos
+     */
+
     public function insertOrderDetails(array $orderDetailsData)
     {
 

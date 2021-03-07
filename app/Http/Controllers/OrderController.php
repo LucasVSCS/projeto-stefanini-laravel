@@ -43,6 +43,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
+        // Validando os dados inseridos pelo usúario na página de checkout
         $validator = Validator::make($request->all(), [
             'product-code' => ['required'],
             'product-quantity' => ['required', 'numeric'],
@@ -57,13 +58,16 @@ class OrderController extends Controller
             'number' => ['required', 'integer'],
         ]);
 
+        // Casos os dados da validação estejam incorretos o usuário é redirecionado para página principal com um aviso de erro
         if ($validator->fails()) {
             return redirect()
                 ->route('products.index')
                 ->with('error', 'Erro ao registrar o pedido, verifique todos os dados e tente novamente.');
         }
 
+        // Iniciando a transaction automática do laravel para evitar erros de persistência no BD
         DB::transaction(function () use ($request) {
+
             // Armazenando os dados do usuário
             $userData = [
                 'name' => $request->input('name'),
@@ -114,6 +118,7 @@ class OrderController extends Controller
 
         });
 
+        // Redirect do usuário para página principal com o aviso de sucesso no registro do pedido
         return redirect()
             ->route('products.index')
             ->with('success', 'Sucesso ao registrar o pedido!');
@@ -164,6 +169,11 @@ class OrderController extends Controller
     {
         //
     }
+
+    /*
+     * Verifica a disponibilidade do produto selecionado e exibe o carrinho de compras
+     *  com os dados do produto selecionado.
+     */
 
     public function checkout(Request $request)
     {

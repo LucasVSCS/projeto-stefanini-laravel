@@ -18,6 +18,13 @@ class User extends Authenticatable
 
     protected $fillable = ['name', 'email'];
 
+    /*
+     * Função para inserir os dados do usuário no banco de dados
+     *
+     * Recebe: Array com dados do usuário
+     * Retorna: Uma instância do usuário recém registrado
+     */
+
     public function insertUser(array $userData)
     {
 

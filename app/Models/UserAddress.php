@@ -17,6 +17,13 @@ class UserAddress extends Model
 
     protected $fillable = ['zip_code', 'address', 'second_address', 'number', 'city', 'state', 'user_id'];
 
+    /*
+     * Função para inserir os dados do endereço do usuário no banco de dados
+     *
+     * Recebe: Array com dados do endereço do usuário e seu ID
+     * Retorna: Uma instância dos dados de endereço recém registrado
+     */
+
     public function insertUserAddress(array $userAddressData)
     {
         $userAddress = UserAddress::create([

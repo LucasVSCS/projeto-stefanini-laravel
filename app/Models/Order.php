@@ -17,6 +17,13 @@ class Order extends Model
 
     protected $fillable = ['date', 'final_price', 'user_id'];
 
+    /*
+     * Função para inserir os dados do pedido no banco de dados
+     *
+     * Recebe: Array com dados do pedido
+     * Retorna: Uma instância do pedido recém registrado
+     */
+
     public function insertOrder(array $orderData)
     {
 
