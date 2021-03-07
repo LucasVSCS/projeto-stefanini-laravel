@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -35,7 +36,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -82,4 +83,32 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function checkout(Request $request)
+    {
+        $product = new Product;
+
+        $isAvailable = $product->verifyAvailableStock(
+            $request->get('product-code'),
+            $request->get('product-quantity')
+        );
+
+        if ($isAvailable) {
+
+            return view('cart-checkout', [
+                'productPrice' => $isAvailable->price,
+                'productStock' => $isAvailable->stock_quantity,
+                'productName' => $isAvailable->name,
+                'productImage' => $isAvailable->image_url,
+                'productCode' => $request->get('product-code'),
+                'productQuantityOrder' => $request->get('product-quantity'),
+                'finalOrderPrice' => ($isAvailable->price * $request->get('product-quantity')),
+            ]);
+
+        } else {
+            dd('não tem nada');
+        }
+
+    }
+
 }
